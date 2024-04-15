@@ -4,7 +4,7 @@ from pydantic.v1 import BaseModel
 
 def write_report(filename, html):
     with open(filename, "w") as f:
-        f.write(".html")
+        f.write(html)
         
         
         

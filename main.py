@@ -17,7 +17,9 @@ from handlers.chat_model_start_handler import ChatModelStartHandler
 
 load_dotenv()
 handler = ChatModelStartHandler()
-chat= ChatOpenAI()
+chat= ChatOpenAI(
+    callbacks=[handler]
+)
 
 tables= list_tables()
 
@@ -44,11 +46,11 @@ agent = create_openai_functions_agent(
 
 agent_executor= AgentExecutor(
     agent=agent,
-    verbose=True,
+    verbose=False,
     tools=tools,
-    memory=memory
+    memory=memory,
 )
 
-agent_executor.invoke({"input":"What are the top 5 products, Save a report of the ouput"})
+agent_executor.invoke({"input":"list the highest products in price"})
 
 #agent_executor.invoke({"input":"Repeat the exact same process for users"})
